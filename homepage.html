@@ -1,0 +1,347 @@
+<?php
+include("config.php");
+
+if(isset($_POST['sub']))
+{
+$fname=$_REQUEST['fn'];
+$lname=$_REQUEST['ln'];
+$id=$_REQUEST['ma'];
+$pass=$_REQUEST['pa'];
+$phone=$_REQUEST['mo'];
+$add=$_REQUEST['ad'];
+
+if($_REQUEST['sub'])
+{
+$sel=mysql_query("select email from regtable where email='$id' ");
+$arr=mysql_fetch_array($sel);
+
+if($arr['email']!=$id)
+  {
+   if(mysql_query("insert into regtable (fname,lname,email,mobno,addr,passw) values('$fname','$lname','$id','$phone','$add','$pass')"))
+	   {
+	      
+	    echo "<html><script language='JavaScript'>alert('Registration succesfully.')</script></html>";
+	    echo "<script>location.href='viewplants.php'</script>";
+
+	   }
+	 }
+else 
+{
+echo "<html><script language='JavaScript'>alert('user already exists.')</script></html>";
+}
+}
+}
+?>
+
+
+
+<HTML>
+<head>
+<title>HOME</title>
+
+<font color="red">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+* {box-sizing: border-box}
+body {font-family: Arial, Helvetica, sans-serif;}
+.mySlides {display: none;}
+img {vertical-align: middle;}
+
+.navbar {
+  width: 100%;
+  background-color: #555;
+  overflow: auto;
+}
+
+.navbar a {
+  float: left;
+  padding: 12px;
+  color: white;
+  text-decoration: none;
+  font-size: 17px;
+  width: 20%; /* Four links of equal widths */
+  text-align: center;
+}
+
+.navbar a:hover {
+  background-color: #000;
+}
+
+.navbar a.active {
+  background-color: #4CAF50;
+}
+
+@media screen and (max-width: 500px) {
+  .navbar a {
+    float: none;
+    display: block;
+    width: 100%;
+    text-align: left;
+  }
+}
+
+/* Slideshow container */
+.slideshow-container {
+  max-width: 500px;
+  position: relative;
+  
+  
+}
+
+/* Caption text */
+.text {
+  color: white;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: left;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+.active {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .5} 
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .text {font-size: 11px
+        
+	}
+}
+
+input[type=text],input[type=password]{
+  width: 30%;
+  padding: 10px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: 2px groove;
+  background: #f1f1f1;
+}
+
+ input[type=submit] {
+  width: 20%;
+  padding: 5px;
+  font-size: 20px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: 9px groove;
+  background: lightgreen;
+}
+
+
+fieldset {
+  display: block;
+  margin-left: 10px;
+  margin-right: 10px;
+  padding-top: 0.35em;
+  padding-bottom: 0.625em;
+  padding-left: 0.75em;
+  padding-right: 0.75em;
+  border: 7px black (internal value);
+}
+
+table,tr {
+  
+  border: 5px solid black;
+}
+
+
+
+</style>
+      <?php include("header.php");?>
+<div class="navbar">
+  <a href="homepage.php">Home</a> 
+  <a href="viewplants.php">View Plants</a> 
+  <a href="aboutpage.php">About Us</a>
+  <a href="contactpage.php">Contact Us</a>
+  <a href="adminloginpage.php">Admin Login</a>
+</div>
+</font>
+
+<body bgcolor="cornsilk">
+<script>
+
+function checkvalidation()
+
+{
+
+var name=/^[a-zA-Z ]{2,15}$/;
+
+   var email=/^[a-zA-Z0-9-_\.]+@[a-zA-Z]+\.[a-zA-Z]{2,3}$/;
+
+var pass=/^[a-zA-Z0-9-_]{2,16}$/;
+
+var mob=/^[0-9]{9,14}$/;
+var addr=/^[a-zA-Z0-9 ]{2,150}$/;
+
+if(document.regform.fn.value.search(name)==-1)
+{
+alert("ENTER CORRECT FIRST NAME");
+document.regform.fn.focus();
+return false;
+}
+
+else if(document.regform.ln.value.search(name)==-1)
+{
+alert("ENTER CORRECT LAST NAME");
+document.regform.ln.focus();
+return false;
+}
+
+else if(document.regform.ma.value.search(email)==-1)
+{
+alert("ENTER CORRECT EMAIL");
+document.regform.ma.focus();
+return false;
+}
+
+else if(document.regform.mo.value.search(mob)==-1)
+{
+alert("ENTER CORRECT MOBILE NUMBER");
+document.regform.mo.focus();
+return false;
+}
+
+else if(document.regform.ad.value.search(addr)==-1)
+{
+alert("ENTER CORRECT ADDRESS");
+document.regform.ad.focus();
+return false;
+}
+
+else if(document.regform.pa.value.search(pass)==-1)
+{
+alert("ENTER CORRECT PASSWORD");
+document.regform.pa.focus();
+return false;
+}
+
+else
+{
+return true;
+}
+}
+</script>
+<br>
+
+
+<center>
+ <table bgcolor="lightblue">
+<tr>
+<td>
+<center>
+<div class="slideshow-container">
+
+<div class="mySlides fade">
+  <div class="numbertext">1 / 3</div>
+  <img src="imagess/4.jpg" style="width:100%">
+  <div class="text">Tulsi (Ocimum sanctum).</div>  
+</div>
+
+<div class="mySlides fade">
+  <div class="numbertext">2 / 3</div>
+  <img src="imagess/3.jpg" style="width:100%">
+  <div class="text">Pippali (Piper longum).</div>		
+</div>
+
+<div class="mySlides fade">
+  <div class="numbertext">3 / 3</div>
+  <img src="imagess/10.jpg" style="width:100%">
+  <div class="text">Neem.</div> 
+</div>
+
+</div>
+<div style="text-align:left">
+  <span class="dot"></span> 
+  <span class="dot"></span> 
+  <span class="dot"></span> 
+</div>
+</center>
+</td>
+
+<td>
+<center>
+<font size="5" face="High Tower Text">
+Owing to fast paced world that we are living in,we are getting far<br> 
+from the nature.While the lifestyle that we live can have adverse <br>
+effect on us,it is important to know  that by  introducing  small <br>
+changes in our daily life can go a long way in keeping us healthy <br>
+and energetic.Therefore, the importance of Ayurveda holds true in <br>
+today’s life as it is based on the principalof bringing us close to <br>
+nature and relying on its natural powers to cure us and keep us  <br>
+ healthy without any side effects.Thanks to the use of natural <br>
+ingredients and medicinal herbs,Ayurvedic medicines and products <br> 
+today have become a symbol of safety in contrast to synthetic <br>
+drugs that are considered unsafe and hazardous for overall health<br>
+</font>
+</center>
+</td>
+</tr>
+</table>
+</center>
+<br>
+
+<form method="post" name="regform" onSubmit="return checkvalidation()"  >
+<fieldset>
+<legend align="center"><h2><fieldset><div style="background-color:lightblue">Registration</fieldset></h2></legend>
+<div style="background-color:lightblue">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font size="5"><b>First Name:-</b></font>  	<input type="text" id="fn" name="fn"/>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	<font size="5"><b>Last Name:-</font></b>	<input type="text" id="ln" name="ln"/><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font size="5"><b>E-Mail:-</b> </font>	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	<input type="text" id="ma" name="ma"/>    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      <font size="5"><b>Mobile-No:-</font></b>  &nbsp;   <input type="text" id="mo" name="mo"/><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font size="5"><b>Address:-</b></font>	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	<input type="text" id="ad" name="ad"/>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font size="5"><b>Password:-</b> </font>	&nbsp;&nbsp;<input type="password" id="pa" name="pa"/> <br>
+<center><input type="submit" name="sub" id="sub" value="Register"/></center><br>
+</div>
+</fieldset>
+</form>
+<script>
+var slideIndex = 0;
+showSlides();
+
+function showSlides() {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("dot");
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";  
+  }
+  slideIndex++;
+  if (slideIndex > slides.length) {slideIndex = 1}    
+  for (i = 0; i <dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";  
+  dots[slideIndex-1].className += " active";
+  setTimeout(showSlides, 2000); // Change image every 2 seconds
+}
+</script>
+ <?php include("footer.php");?>
+</body>
+</html>
